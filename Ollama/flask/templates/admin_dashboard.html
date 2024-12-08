@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+<form method="POST">
+    <input type="hidden" name="add">
+    <label>Username</label>
+    <input type="text" name="username" required>
+    <label>Password</label>
+    <input type="password" name="password" required>
+    <label>Type</label>
+    <select name="type">
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+    </select>
+    <button type="submit">Add User</button>
+</form>
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Type</th>
+        <th>Actions</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td>{{ user[1] }}</td>
+        <td>{{ user[2] }}</td>
+        <td>{{ user[3] }}</td>
+        <td>
+            {% if user[1] != 'admin' %}
+            <form method="POST" style="display:inline;">
+                <button type="submit" name="delete" value="{{ user[0] }}">Delete</button>
+            </form>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Chatbot</h2>
+<a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+<div>
+    {% for message, response in chat_history %}
+    <p><strong>You:</strong> {{ message }}</p>
+    <p><strong>Bot:</strong> {{ response }}</p>
+    {% endfor %}
+</div>
+<form method="POST">
+    <label>Your Message:</label>
+    <input type="text" name="user_message" required>
+    <button type="submit">Send</button>
+</form>
+{% endblock %}
